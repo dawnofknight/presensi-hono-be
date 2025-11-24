@@ -1,18 +1,7 @@
 {
-  "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install --include=dev",
-  "framework": null,
   "functions": {
-    "api/index.ts": {
+    "api/**/*.ts": {
       "maxDuration": 10
     }
-  },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "api/index.ts"
-    }
-  ]
+  }
 }
