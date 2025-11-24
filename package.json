@@ -5,12 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc && npm run prisma:generate",
+    "build": "npx tsc && npm run prisma:generate",
     "start": "node dist/index.js",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio",
-    "check-types": "tsc --noEmit",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:studio": "npx prisma studio",
+    "check-types": "npx tsc --noEmit",
     "vercel-build": "npm run build"
   },
   "keywords": [
