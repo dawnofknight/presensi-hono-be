@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { serve } from "@hono/node-server";
 import "./types"; // Import types to augment Hono Context
 import authRoutes from "./routes/auth";
 import attendanceRoutes from "./routes/attendance";
@@ -10,12 +9,18 @@ import userRoutes from "./routes/user";
 const app = new Hono();
 
 // CORS middleware
-app.use("/*", cors({
-  origin: ["http://localhost:3000", "https://your-frontend-domain.vercel.app"],
-  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-}));
+app.use(
+  "/*",
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://your-frontend-domain.vercel.app",
+    ],
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 // Health check
 app.get("/", (c) => c.json({ message: "Presensi API" }));
@@ -25,16 +30,5 @@ app.route("/api/auth", authRoutes);
 app.route("/api/attendance", attendanceRoutes);
 app.route("/api/admin", adminRoutes);
 app.route("/api/user", userRoutes);
-
-// For local development
-if (process.env.NODE_ENV !== "production") {
-  const port = process.env.PORT ? parseInt(process.env.PORT) : 3001;
-  console.log(`Server running on http://localhost:${port}`);
-
-  serve({
-    fetch: app.fetch,
-    port,
-  });
-}
 
 export default app;
