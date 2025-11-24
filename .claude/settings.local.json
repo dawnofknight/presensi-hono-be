@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx typescript:*)",
+      "Bash(npm audit fix:*)",
+      "Bash(npx prisma generate)",
+      "Bash(DATABASE_URL=\"postgresql://user:password@localhost:5432/presensi_db\" npx prisma generate:*)",
+      "Bash(npm run check-types:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 5 npm run dev:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

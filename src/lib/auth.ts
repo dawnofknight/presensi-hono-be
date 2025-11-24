@@ -28,7 +28,7 @@ export const authMiddleware = async (c: Context, next: Next) => {
 };
 
 export const adminOnly = async (c: Context, next: Next) => {
-  const user = c.get("user") as AuthPayload;
+  const user = c.get("user");
 
   if (user.role !== "ADMIN") {
     return c.json({ message: "Forbidden" }, 403);

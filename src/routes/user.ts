@@ -8,7 +8,7 @@ const app = new Hono();
 // Change password
 app.post("/change-password", authMiddleware, async (c) => {
   try {
-    const user = c.get("user") as AuthPayload;
+    const user = c.get("user");
     const { currentPassword, newPassword } = await c.req.json();
 
     const dbUser = await prisma.user.findUnique({

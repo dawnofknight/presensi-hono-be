@@ -71,6 +71,28 @@ DATABASE_URL="your-prod-db-url" npx prisma migrate deploy
 DATABASE_URL="your-prod-db-url" npx prisma db seed
 ```
 
+### Troubleshooting Vercel 500 Errors
+
+If you get a `500: INTERNAL_SERVER_ERROR` on Vercel:
+
+1. **Check Environment Variables** in Vercel dashboard:
+   - `DATABASE_URL` must be a valid PostgreSQL connection string
+   - `JWT_SECRET` must be set (generate with: `openssl rand -base64 32`)
+
+2. **Database Connection Issues**:
+   - Ensure your PostgreSQL database allows connections from Vercel
+   - For Vercel Postgres: Use the provided connection string directly
+   - For external databases: Check if SSL is required
+
+3. **Check Function Logs**:
+   - Go to Vercel dashboard → Functions tab
+   - Look for specific error messages in the function logs
+
+4. **Common Issues**:
+   - Missing `DATABASE_URL` or `JWT_SECRET` environment variables
+   - Database not accessible from Vercel's network
+   - Invalid PostgreSQL connection string format
+
 ## API Endpoints
 
 ### Auth

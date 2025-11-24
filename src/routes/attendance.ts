@@ -8,7 +8,7 @@ const app = new Hono();
 // Get today's attendance
 app.get("/today", authMiddleware, async (c) => {
   try {
-    const user = c.get("user") as AuthPayload;
+    const user = c.get("user");
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -29,7 +29,7 @@ app.get("/today", authMiddleware, async (c) => {
 // Get user attendance history
 app.get("/user", authMiddleware, async (c) => {
   try {
-    const user = c.get("user") as AuthPayload;
+    const user = c.get("user");
 
     const attendances = await prisma.attendance.findMany({
       where: { userId: user.userId },
@@ -47,7 +47,7 @@ app.get("/user", authMiddleware, async (c) => {
 // Check-in
 app.post("/checkin", authMiddleware, async (c) => {
   try {
-    const user = c.get("user") as AuthPayload;
+    const user = c.get("user");
     const { latitude, longitude } = await c.req.json();
 
     // Get geofencing settings
@@ -137,7 +137,7 @@ app.post("/checkin", authMiddleware, async (c) => {
 // Check-out
 app.put("/checkout/:id", authMiddleware, async (c) => {
   try {
-    const user = c.get("user") as AuthPayload;
+    const user = c.get("user");
     const id = c.req.param("id");
 
     const attendance = await prisma.attendance.findUnique({
